@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MobilePhoneServiceApp.Database;
+using MobilePhoneServiceApp.ViewModels;
 
 namespace MobilePhoneServiceApp
 {
@@ -19,9 +21,10 @@ namespace MobilePhoneServiceApp
         private static void ConfigureServices(ServiceCollection services)
         {
             // Add DbContext
-            services.AddDbContext<TestDbContext>();
+            services.AddDbContext<AppDbContext>();
 
-            services.AddSingleton<MainWindow>();
+            // Add ViewModels
+            services.AddTransient<MainWindowViewModel>();
         }
     }
 }
