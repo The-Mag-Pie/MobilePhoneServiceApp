@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<connectionStrings>
+		<add name="oracleConnectionString" connectionString="Data Source={host_or_ip}:{port}/{service_name};User Id={username};Password={password};"/>
+	</connectionStrings>
+</configuration>
