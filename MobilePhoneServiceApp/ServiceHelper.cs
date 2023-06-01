@@ -24,7 +24,10 @@ namespace MobilePhoneServiceApp
             services.AddDbContext<AppDbContext>();
 
             // Add ViewModels
-            services.AddTransient<RepairOrdersViewModel>();
+            services.AddTransient<OrdersViewModel>();
+            services.AddTransient<PhonesViewModel>();
+            services.AddTransient<DeliveryAddressesViewModel>();
+            services.AddTransient<ClientsViewModel>();
         }
     }
 }

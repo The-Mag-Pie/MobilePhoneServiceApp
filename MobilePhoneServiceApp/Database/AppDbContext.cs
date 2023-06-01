@@ -12,7 +12,7 @@ namespace MobilePhoneServiceApp.Database
         public DbSet<DeliveryAddress> DeliveryAddresses { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Phone> Phones { get; set; }
-        public DbSet<RepairOrder> RepairOrders { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public AppDbContext() : base() { }
 

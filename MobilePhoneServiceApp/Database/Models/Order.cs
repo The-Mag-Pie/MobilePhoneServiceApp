@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MobilePhoneServiceApp.Database.Models
 {
     [Table("ZLECENIA")]
-    public class RepairOrder
+    public class Order
     {
         [Key]
         [Column("ID_ZLECENIA")]

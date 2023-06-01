@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MobilePhoneServiceApp.Windows"
         mc:Ignorable="d"
-        Title="Mobile Phone Service App" Height="400" Width="500">
+        Title="Aplikacja serwisu telefonów komórkowych" Height="400" Width="500">
 
     <Window.Resources>
         <Style TargetType="Button">
@@ -40,19 +40,23 @@
 
         <Button Content="Zlecenia"
                 Grid.Row="1"
-                Grid.Column="0"/>
+                Grid.Column="0"
+                Click="RepairOrders_Click"/>
 
         <Button Content="Telefony"
                 Grid.Row="1"
-                Grid.Column="1"/>
+                Grid.Column="1"
+                Click="Phones_Click"/>
 
         <Button Content="Adresy do przesyłek"
                 Grid.Row="2"
-                Grid.Column="0"/>
+                Grid.Column="0"
+                Click="DeliveryAddresses_Click"/>
 
         <Button Content="Klienci"
                 Grid.Row="2"
-                Grid.Column="1"/>
+                Grid.Column="1"
+                Click="Clients_Click"/>
 
     </Grid>
 </Window>
