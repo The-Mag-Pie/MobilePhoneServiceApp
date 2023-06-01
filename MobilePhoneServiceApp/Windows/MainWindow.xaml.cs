@@ -8,8 +8,6 @@ namespace MobilePhoneServiceApp.Windows
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = ServiceHelper.GetService<MainWindowViewModel>();
         }
     }
 }

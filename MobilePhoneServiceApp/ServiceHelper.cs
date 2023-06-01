@@ -24,7 +24,7 @@ namespace MobilePhoneServiceApp
             services.AddDbContext<AppDbContext>();
 
             // Add ViewModels
-            services.AddTransient<MainWindowViewModel>();
+            services.AddTransient<RepairOrdersViewModel>();
         }
     }
 }

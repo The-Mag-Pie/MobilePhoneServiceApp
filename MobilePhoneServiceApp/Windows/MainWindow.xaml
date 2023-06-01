@@ -5,21 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MobilePhoneServiceApp.Windows"
         mc:Ignorable="d"
-        Title="Mobile Phone Service App" Height="450" Width="800">
-    <Grid Margin="10">
+        Title="Mobile Phone Service App" Height="400" Width="500">
 
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid HorizontalAlignment="Center"
+          VerticalAlignment="Center">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0"
-                    Orientation="Horizontal">
-            <Label Content="Selected database table:"/>
-            <ComboBox ItemsSource="{Binding DatabaseTables}"
-                      SelectedIndex="0"/>
-        </StackPanel>
+        <Label Content="Wybierz tabelę:"
+               Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               HorizontalAlignment="Center"
+               FontSize="20"
+               FontWeight="Bold"/>
+
+        <Button Content="Zlecenia"
+                Grid.Row="1"
+                Grid.Column="0"/>
+
+        <Button Content="Telefony"
+                Grid.Row="1"
+                Grid.Column="1"/>
+
+        <Button Content="Adresy do przesyłek"
+                Grid.Row="2"
+                Grid.Column="0"/>
+
+        <Button Content="Klienci"
+                Grid.Row="2"
+                Grid.Column="1"/>
 
     </Grid>
 </Window>
