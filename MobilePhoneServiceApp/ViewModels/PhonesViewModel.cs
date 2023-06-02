@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MobilePhoneServiceApp.Database;
 using MobilePhoneServiceApp.Database.Models;
+using MobilePhoneServiceApp.Windows;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -52,7 +53,25 @@ namespace MobilePhoneServiceApp.ViewModels
         [RelayCommand(CanExecute = nameof(CanBeExecuted))]
         private void Modify()
         {
+            var modifyWindow = new ModifyPhoneWindow(SelectedPhone);
+            modifyWindow.ShowDialog();
 
+            var result = modifyWindow.Result;
+
+            if (result is not null)
+            {
+                SelectedPhone.Brand = result.Brand;
+                SelectedPhone.Model = result.Model;
+                SelectedPhone.IMEI = result.IMEI;
+                SelectedPhone.PhotosURL = result.PhotosURL;
+
+                // SelectedPhone is one of tracked entities so no need to call Update()
+                _dbContext.SaveChanges();
+
+                LoadItems();
+
+                MessageBox.Show("Telefon został pomyślnie zmodyfikowany.");
+            }
         }
 
         [RelayCommand(CanExecute = nameof(CanBeExecuted))]
@@ -76,12 +95,27 @@ namespace MobilePhoneServiceApp.ViewModels
 
             Phones.Remove(SelectedPhone);
             SelectedPhone = null;
+
+            MessageBox.Show("Telefon został pomyślnie usunięty.");
         }
 
         [RelayCommand]
         private void AddNew()
         {
+            var addNewWindow = new AddPhoneWindow();
+            addNewWindow.ShowDialog();
 
+            var result = addNewWindow.Result;
+
+            if (result is not null)
+            {
+                _dbContext.Phones.Add(result);
+                _dbContext.SaveChanges();
+                
+                LoadItems();
+
+                MessageBox.Show("Telefon został pomyślnie dodany.");
+            }
         }
     }
 }

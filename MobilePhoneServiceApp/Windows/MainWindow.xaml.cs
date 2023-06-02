@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace MobilePhoneServiceApp.Windows
 {
@@ -11,12 +12,12 @@ namespace MobilePhoneServiceApp.Windows
 
         private void RepairOrders_Click(object sender, RoutedEventArgs e)
         {
-            ShowWindow(new OrdersWindow());
+            ShowWindow<OrdersWindow>();
         }
 
         private void Phones_Click(object sender, RoutedEventArgs e)
         {
-            ShowWindow(new PhonesWindow());
+            ShowWindow<PhonesWindow>();
         }
 
         private void DeliveryAddresses_Click(object sender, RoutedEventArgs e)
@@ -29,12 +30,18 @@ namespace MobilePhoneServiceApp.Windows
 
         }
 
-        private void ShowWindow(Window window)
+        private void ShowWindow<T>() where T : Window, new()
         {
+            Cursor = Cursors.Wait;
+
+            var window = new T();
+
             // Hide current window, show selected window and wait for closing, show current window
             Hide();
             window.ShowDialog();
             Show();
+
+            Cursor = null;
         }
     }
 }
