@@ -32,7 +32,7 @@ namespace MobilePhoneServiceApp.ViewModels
         private void LoadItems()
         {
             Phones.Clear();
-            foreach (var item in _dbContext.Phones)
+            foreach (var item in _dbContext.Phones.OrderBy(p => p.ID))
             {
                 Phones.Add(item);
             }

@@ -22,7 +22,7 @@ namespace MobilePhoneServiceApp.Windows
 
         private void DeliveryAddresses_Click(object sender, RoutedEventArgs e)
         {
-
+            ShowWindow<DeliveryAddressesWindow>();
         }
 
         private void Clients_Click(object sender, RoutedEventArgs e)
