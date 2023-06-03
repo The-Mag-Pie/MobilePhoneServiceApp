@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MobilePhoneServiceApp.Database;
 using MobilePhoneServiceApp.Database.Models;
+using MobilePhoneServiceApp.Windows;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -54,25 +55,27 @@ namespace MobilePhoneServiceApp.ViewModels
         [RelayCommand(CanExecute = nameof(CanBeExecuted))]
         private void Modify()
         {
-            //var modifyWindow = new ModifyPhoneWindow(SelectedPhone);
-            //modifyWindow.ShowDialog();
+            var modifyWindow = new ModifyAddressWindow(SelectedAddress);
+            modifyWindow.ShowDialog();
 
-            //var result = modifyWindow.Result;
+            var result = modifyWindow.Result;
 
-            //if (result is not null)
-            //{
-            //    SelectedPhone.Brand = result.Brand;
-            //    SelectedPhone.Model = result.Model;
-            //    SelectedPhone.IMEI = result.IMEI;
-            //    SelectedPhone.PhotosURL = result.PhotosURL;
+            if (result is not null)
+            {
+                SelectedAddress.Country = result.Country;
+                SelectedAddress.City = result.City;
+                SelectedAddress.PostCode = result.PostCode;
+                SelectedAddress.Street = result.Street;
+                SelectedAddress.HouseNumber = result.HouseNumber;
+                SelectedAddress.ApartmentNumber = result.ApartmentNumber;
 
-            //    // SelectedPhone is one of tracked entities so no need to call Update()
-            //    _dbContext.SaveChanges();
+                // SelectedAddress is one of tracked entities so no need to call Update()
+                _dbContext.SaveChanges();
 
-            //    LoadItems();
+                LoadItems();
 
-            //    MessageBox.Show("Telefon został pomyślnie zmodyfikowany.");
-            //}
+                MessageBox.Show("Adres został pomyślnie zmodyfikowany.");
+            }
         }
 
         [RelayCommand(CanExecute = nameof(CanBeExecuted))]
@@ -100,20 +103,20 @@ namespace MobilePhoneServiceApp.ViewModels
         [RelayCommand]
         private void AddNew()
         {
-            //var addNewWindow = new AddPhoneWindow();
-            //addNewWindow.ShowDialog();
+            var addNewWindow = new AddAddressWindow();
+            addNewWindow.ShowDialog();
 
-            //var result = addNewWindow.Result;
+            var result = addNewWindow.Result;
 
-            //if (result is not null)
-            //{
-            //    _dbContext.Phones.Add(result);
-            //    _dbContext.SaveChanges();
+            if (result is not null)
+            {
+                _dbContext.DeliveryAddresses.Add(result);
+                _dbContext.SaveChanges();
 
-            //    LoadItems();
+                LoadItems();
 
-            //    MessageBox.Show("Telefon został pomyślnie dodany.");
-            //}
+                MessageBox.Show("Adres został pomyślnie dodany.");
+            }
         }
     }
 }

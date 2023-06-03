@@ -53,10 +53,6 @@ namespace MobilePhoneServiceApp.Windows
                     messageText += "Niepoprawny URL do zdjęć telefonu!";
                 }
             }
-            else
-            {
-                _phone.PhotosURL = null;
-            }
 
             if (messageText != string.Empty)
             {
