@@ -27,7 +27,7 @@ namespace MobilePhoneServiceApp.Windows
 
         private void Clients_Click(object sender, RoutedEventArgs e)
         {
-
+            ShowWindow<ClientsWindow>();
         }
 
         private void ShowWindow<T>() where T : Window, new()
