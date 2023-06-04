@@ -41,10 +41,10 @@ namespace MobilePhoneServiceApp.Windows
             {
                 messageText += "Kod pocztowy nie może być pusty!\n";
             }
-            //else if (IsPostCodeValid())
-            //{
-            //    messageText += "Kod pocztowy jest niepoprawny!\n";
-            //}
+            else if (IsPostCodeValid() == false)
+            {
+                messageText += "Kod pocztowy jest niepoprawny!\n";
+            }
 
             if (street is null || street == string.Empty)
             {
@@ -67,10 +67,10 @@ namespace MobilePhoneServiceApp.Windows
             }
         }
 
-        //private bool IsPostCodeValid()
-        //{
-        //    return new Regex("[0-9]{2}[-]([0-9]){3}").IsMatch(_address.PostCode);
-        //}
+        private bool IsPostCodeValid()
+        {
+            return new Regex("^[0-9]{2}-[0-9]{3}$").IsMatch(_address.PostCode);
+        }
 
         private void TextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
