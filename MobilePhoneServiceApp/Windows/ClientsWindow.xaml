@@ -61,9 +61,9 @@
                     <GridViewColumn Header="Nr_Domu"
                                     DisplayMemberBinding="{Binding HouseNumber}"/>
                     <GridViewColumn Header="Nr_Mieszkania"
-                                    DisplayMemberBinding="{Binding ApartmentNumber}"/>
+                                    DisplayMemberBinding="{Binding ApartmentNumber, TargetNullValue='(null)'}"/>
                     <GridViewColumn Header="Email"
-                                    DisplayMemberBinding="{Binding Email}"/>
+                                    DisplayMemberBinding="{Binding Email, TargetNullValue='(null)'}"/>
                     <GridViewColumn Header="Nr_Telefonu"
                                     DisplayMemberBinding="{Binding PhoneNumber}"/>
                 </GridView>

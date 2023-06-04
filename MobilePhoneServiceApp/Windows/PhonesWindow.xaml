@@ -55,7 +55,7 @@
                     <GridViewColumn Header="IMEI"
                                     DisplayMemberBinding="{Binding IMEI}"/>
                     <GridViewColumn Header="Zdjecia_URL"
-                                    DisplayMemberBinding="{Binding PhotosURL}"/>
+                                    DisplayMemberBinding="{Binding PhotosURL, TargetNullValue='(null)'}"/>
                 </GridView>
             </ListView.View>
         </ListView>

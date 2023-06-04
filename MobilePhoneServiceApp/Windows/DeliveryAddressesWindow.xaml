@@ -59,7 +59,7 @@
                     <GridViewColumn Header="Nr_Domu"
                                     DisplayMemberBinding="{Binding HouseNumber}"/>
                     <GridViewColumn Header="Nr_Mieszkania"
-                                    DisplayMemberBinding="{Binding ApartmentNumber}"/>
+                                    DisplayMemberBinding="{Binding ApartmentNumber, TargetNullValue='(null)'}"/>
                 </GridView>
             </ListView.View>
         </ListView>
