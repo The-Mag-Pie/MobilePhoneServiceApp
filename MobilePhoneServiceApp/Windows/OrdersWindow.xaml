@@ -5,61 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MobilePhoneServiceApp.Windows"
         mc:Ignorable="d"
-        Title="Zlecenia" Height="425" Width="600">
+        Title="Zlecenia" Height="600" Width="1400">
+    
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+    </Window.Resources>
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+        <Button Grid.Column="0" Grid.Row="0"
+                Content="Pokaż szczegóły"
+                Command="{Binding ShowDetailsCommand}"/>
+        <Button Grid.Column="1" Grid.Row="0"
+                Content="Modyfikuj"
+                Command="{Binding ModifyCommand}"/>
+        <Button Grid.Column="2" Grid.Row="0"
+                Content="Usuń"
+                Command="{Binding DeleteCommand}"/>
+        <Button Grid.Column="3" Grid.Row="0"
+                Content="Dodaj nowy"
+                Command="{Binding AddNewCommand}"
+                Background="LightGreen"/>
 
-            <Label Grid.Column="0" Grid.Row="0"
-                   Content="ID Zlecenia:"/>
-            <Label Grid.Column="0" Grid.Row="1"
-                   Content="Opis szkody:"/>
-            <Label Grid.Column="0" Grid.Row="2"
-                   Content="Status zlecenia:"/>
-            <Label Grid.Column="0" Grid.Row="3"
-                   Content="Adres do przesyłki:"/>
-            <Label Grid.Column="0" Grid.Row="4"
-                   Content="Klient:"/>
-            <Label Grid.Column="0" Grid.Row="5"
-                   Content="Telefon:"/>
-            <Label Grid.Column="0" Grid.Row="6"
-                   Content="Serwisant:"/>
-            <Label Grid.Column="0" Grid.Row="7"
-                   Content="Obsługa klienta:"/>
-            
-        </Grid>
-
-        <ListView Name="OrdersList"
-                  Grid.Column="0" Grid.Row="1"
-                  Grid.ColumnSpan="2"
-                  ItemsSource="{Binding RepairOrders}">
+        <ListView Grid.Column="0" Grid.Row="1"
+                  Grid.ColumnSpan="4"
+                  ItemsSource="{Binding Orders}"
+                  SelectedItem="{Binding SelectedOrder}">
             <ListView.View>
                 <GridView>
-                    <!--<GridViewColumn Header="ID_zlecenia"
-                                    DisplayMemberBinding="{Binding ID}"-->
+                    <GridViewColumn Header="ID_telefonu"
+                                    DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Opis_Szkody"
+                                    DisplayMemberBinding="{Binding DamageDescription}"/>
+                    <GridViewColumn Header="Statusy_Zlecenia_ID_statusu"
+                                    DisplayMemberBinding="{Binding OrderStatusID}"/>
+                    <GridViewColumn Header="Adresy_Do_Przesylek_ID_adresu"
+                                    DisplayMemberBinding="{Binding ShippingAddressID, TargetNullValue='(null)'}"/>
+                    <GridViewColumn Header="Klienci_ID_klienta"
+                                    DisplayMemberBinding="{Binding ClientID}"/>
+                    <GridViewColumn Header="Telefony_ID_telefonu"
+                                    DisplayMemberBinding="{Binding PhoneID}"/>
+                    <GridViewColumn Header="Pracownicy_ID_serwisanta"
+                                    DisplayMemberBinding="{Binding RepairEmployeeID, TargetNullValue='(null)'}"/>
+                    <GridViewColumn Header="Pracownicy_ID_obslugaklienta"
+                                    DisplayMemberBinding="{Binding CustomerServiceEmployeeID, TargetNullValue='(null)'}"/>
                 </GridView>
             </ListView.View>
         </ListView>
