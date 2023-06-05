@@ -6,6 +6,11 @@ namespace MobilePhoneServiceApp.Windows
 {
     public partial class AddModifyAddressWindowBase : Window
     {
+        private static bool IsPostCodeValid(string postCode)
+        {
+            return new Regex("^[0-9]{2}-[0-9]{3}$").IsMatch(postCode);
+        }
+
         public DeliveryAddress? Result { get; private set; } = null;
 
         private readonly DeliveryAddress _address;
@@ -41,7 +46,7 @@ namespace MobilePhoneServiceApp.Windows
             {
                 messageText += "Kod pocztowy nie może być pusty!\n";
             }
-            else if (IsPostCodeValid() == false)
+            else if (IsPostCodeValid(postCode) == false)
             {
                 messageText += "Kod pocztowy jest niepoprawny!\n";
             }
@@ -65,11 +70,6 @@ namespace MobilePhoneServiceApp.Windows
             {
                 return true;
             }
-        }
-
-        private bool IsPostCodeValid()
-        {
-            return new Regex("^[0-9]{2}-[0-9]{3}$").IsMatch(_address.PostCode);
         }
 
         private void TextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)

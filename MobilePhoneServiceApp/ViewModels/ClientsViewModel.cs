@@ -59,27 +59,30 @@ namespace MobilePhoneServiceApp.ViewModels
         [RelayCommand(CanExecute = nameof(CanBeExecuted))]
         private void Modify()
         {
-            //var modifyWindow = new ModifyAddressWindow(SelectedAddress);
-            //modifyWindow.ShowDialog();
+            var modifyWindow = new ModifyClientWindow(SelectedClient);
+            modifyWindow.ShowDialog();
 
-            //var result = modifyWindow.Result;
+            var result = modifyWindow.Result;
 
-            //if (result is not null)
-            //{
-            //    SelectedAddress.Country = result.Country;
-            //    SelectedAddress.City = result.City;
-            //    SelectedAddress.PostCode = result.PostCode;
-            //    SelectedAddress.Street = result.Street;
-            //    SelectedAddress.HouseNumber = result.HouseNumber;
-            //    SelectedAddress.ApartmentNumber = result.ApartmentNumber;
+            if (result is not null)
+            {
+                SelectedClient.FirstName = result.FirstName;
+                SelectedClient.LastName = result.LastName;
+                SelectedClient.Country = result.Country;
+                SelectedClient.City = result.City;
+                SelectedClient.Street = result.Street;
+                SelectedClient.HouseNumber = result.HouseNumber;
+                SelectedClient.ApartmentNumber = result.ApartmentNumber;
+                SelectedClient.Email = result.Email;
+                SelectedClient.PhoneNumber = result.PhoneNumber;
 
-            //    // SelectedAddress is one of tracked entities so no need to call Update()
-            //    _dbContext.SaveChanges();
+                // SelectedClient is one of tracked entities so no need to call Update()
+                _dbContext.SaveChanges();
 
-            //    LoadItems();
+                LoadItems();
 
-            //    MessageBox.Show("Adres został pomyślnie zmodyfikowany.");
-            //}
+                MessageBox.Show("Klient został pomyślnie zmodyfikowany.");
+            }
         }
 
         [RelayCommand(CanExecute = nameof(CanBeExecuted))]
@@ -113,20 +116,20 @@ namespace MobilePhoneServiceApp.ViewModels
         [RelayCommand]
         private void AddNew()
         {
-            //var addNewWindow = new AddAddressWindow();
-            //addNewWindow.ShowDialog();
+            var addNewWindow = new AddClientWindow();
+            addNewWindow.ShowDialog();
 
-            //var result = addNewWindow.Result;
+            var result = addNewWindow.Result;
 
-            //if (result is not null)
-            //{
-            //    _dbContext.DeliveryAddresses.Add(result);
-            //    _dbContext.SaveChanges();
+            if (result is not null)
+            {
+                _dbContext.Clients.Add(result);
+                _dbContext.SaveChanges();
 
-            //    LoadItems();
+                LoadItems();
 
-            //    MessageBox.Show("Adres został pomyślnie dodany.");
-            //}
+                MessageBox.Show("Klient został pomyślnie dodany.");
+            }
         }
     }
 }
