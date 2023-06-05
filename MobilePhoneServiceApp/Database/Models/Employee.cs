@@ -24,5 +24,7 @@ namespace MobilePhoneServiceApp.Database.Models
 
         [Column("DZIALY_ID_DZIALU")]
         public int DepartmentID { get; set; }
+
+        public override string ToString() => $"{LastName} {FirstName}";
     }
 }

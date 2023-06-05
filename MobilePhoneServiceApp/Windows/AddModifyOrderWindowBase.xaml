@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MobilePhoneServiceApp.Windows"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="AddModifyOrderWindowBase" Height="350" Width="500">
+        Title="AddModifyOrderWindowBase" Height="350" Width="550">
 
     <Window.Resources>
         <Style TargetType="Label">
@@ -16,7 +16,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
-        <Style TargetType="Button">
+        <Style x:Key="FooterButtonStyle" TargetType="Button">
             <Setter Property="Padding" Value="40,10"/>
             <Setter Property="Margin" Value="20,0"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -56,18 +56,50 @@
 
         <TextBox Text="{Binding Order.DamageDescription}"
                  Grid.Column="1" Grid.Row="0"/>
-        <TextBox Text="{Binding Order.OrderStatusID}"
-                 Grid.Column="1" Grid.Row="1"/>
-        <TextBox Text="{Binding Order.ShippingAddressID, TargetNullValue={x:Static sys:String.Empty}}"
-                 Grid.Column="1" Grid.Row="2"/>
-        <TextBox Text="{Binding Order.ClientID}"
-                 Grid.Column="1" Grid.Row="3"/>
+        <ComboBox ItemsSource="{Binding OrderStatuses}"
+                  SelectedItem="{Binding SelectedOrderStatus}"
+                  Grid.Column="1" Grid.Row="1"/>
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox ItemsSource="{Binding DeliveryAddresses}"
+                      SelectedItem="{Binding SelectedDeliveryAddress}"
+                      Grid.Column="0"/>
+            <Button Content="Wyczyść"
+                    Grid.Column="1"
+                    Command="{Binding ClearDeliveryAddressCommand}"/>
+        </Grid>
+        <ComboBox ItemsSource="{Binding Clients}"
+                  SelectedItem="{Binding SelectedClient}"
+                  Grid.Column="1" Grid.Row="3"/>
         <TextBox Text="{Binding Order.PhoneID}"
                  Grid.Column="1" Grid.Row="4"/>
-        <TextBox Text="{Binding Order.RepairEmployeeID, TargetNullValue={x:Static sys:String.Empty}}"
-                 Grid.Column="1" Grid.Row="5"/>
-        <TextBox Text="{Binding Order.CustomerServiceEmployeeID, TargetNullValue={x:Static sys:String.Empty}}"
-                 Grid.Column="1" Grid.Row="6"/>
+        <Grid Grid.Column="1" Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox ItemsSource="{Binding RepairEmployees}"
+                      SelectedItem="{Binding SelectedRepairEmployee}"
+                      Grid.Column="0"/>
+            <Button Content="Wyczyść"
+                    Grid.Column="1"
+                    Command="{Binding ClearRepairEmployeeCommand}"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox ItemsSource="{Binding CustomerServiceEmployees}"
+                      SelectedItem="{Binding SelectedCustomerServiceEmployee}"
+                      Grid.Column="0"/>
+            <Button Content="Wyczyść"
+                    Grid.Column="1"
+                    Command="{Binding ClearCustomerServiceEmployeeCommand}"/>
+        </Grid>
 
         <Grid Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2"
               HorizontalAlignment="Center">
@@ -78,10 +110,12 @@
 
             <Button Content="Zapisz"
                     Grid.Column="0"
-                    Click="SaveButton_Click"/>
+                    Click="SaveButton_Click"
+                    Style="{StaticResource FooterButtonStyle}"/>
             <Button Content="Anuluj"
                     Grid.Column="1"
-                    Click="CancelButton_Click"/>
+                    Click="CancelButton_Click"
+                    Style="{StaticResource FooterButtonStyle}"/>
         </Grid>
     </Grid>
 </Window>

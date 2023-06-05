@@ -27,5 +27,8 @@ namespace MobilePhoneServiceApp.Database.Models
 
         [Column("NR_MIESZKANIA")]
         public int? ApartmentNumber { get; set; }
+
+        public override string ToString() =>
+            $"{City}, ul. {Street} {HouseNumber} {ApartmentNumber ?? null}, {Country.ToUpper()}";
     }
 }

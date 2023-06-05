@@ -12,5 +12,7 @@ namespace MobilePhoneServiceApp.Database.Models
 
         [Column("NAZWA_STATUSU")]
         public string StatusName { get; set; }
+
+        public override string ToString() => StatusName;
     }
 }

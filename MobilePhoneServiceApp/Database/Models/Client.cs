@@ -36,5 +36,7 @@ namespace MobilePhoneServiceApp.Database.Models
 
         [Column("NR_TELEFONU")]
         public string PhoneNumber { get; set; }
+
+        public override string ToString() => $"{FirstName} {LastName}";
     }
 }
