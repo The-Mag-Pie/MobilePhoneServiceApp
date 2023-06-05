@@ -89,8 +89,8 @@ namespace MobilePhoneServiceApp.ViewModels
         [RelayCommand(CanExecute = nameof(CanBeExecuted))]
         private void Modify()
         {
-            //var modifyWindow = new ModifyPhoneWindow(SelectedPhone);
-            //modifyWindow.ShowDialog();
+            var modifyWindow = new ModifyOrderWindow(SelectedOrder);
+            modifyWindow.ShowDialog();
 
             //var result = modifyWindow.Result;
 
@@ -128,14 +128,14 @@ namespace MobilePhoneServiceApp.ViewModels
         [RelayCommand]
         private void AddNew()
         {
-            //var addNewWindow = new AddPhoneWindow();
-            //addNewWindow.ShowDialog();
+            var addNewWindow = new AddOrderWindow();
+            addNewWindow.ShowDialog();
 
             //var result = addNewWindow.Result;
 
             //if (result is not null)
             //{
-            //    _dbContext.Phones.Add(result);
+            //    _dbContext.Orders.Add(result);
             //    _dbContext.SaveChanges();
 
             //    LoadItems();

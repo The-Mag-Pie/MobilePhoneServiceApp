@@ -1,0 +1,87 @@
+﻿<Window x:Class="MobilePhoneServiceApp.Windows.AddModifyOrderWindowBase"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MobilePhoneServiceApp.Windows"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="AddModifyOrderWindowBase" Height="350" Width="500">
+
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="40,10"/>
+            <Setter Property="Margin" Value="20,0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Opis szkody:"
+               Grid.Column="0" Grid.Row="0"/>
+        <Label Content="Status zlecenia:"
+               Grid.Column="0" Grid.Row="1"/>
+        <Label Content="Adres do przesyłki:"
+               Grid.Column="0" Grid.Row="2"/>
+        <Label Content="Imię i nazwisko klienta:"
+               Grid.Column="0" Grid.Row="3"/>
+        <Label Content="Marka i model telefonu:"
+               Grid.Column="0" Grid.Row="4"/>
+        <Label Content="Imię i nazwisko serwisanta:"
+               Grid.Column="0" Grid.Row="5"/>
+        <Label Content="Imię i nazwisko pracownika BOK:"
+               Grid.Column="0" Grid.Row="6"/>
+
+        <TextBox Text="{Binding Order.DamageDescription}"
+                 Grid.Column="1" Grid.Row="0"/>
+        <TextBox Text="{Binding Order.OrderStatusID}"
+                 Grid.Column="1" Grid.Row="1"/>
+        <TextBox Text="{Binding Order.ShippingAddressID, TargetNullValue={x:Static sys:String.Empty}}"
+                 Grid.Column="1" Grid.Row="2"/>
+        <TextBox Text="{Binding Order.ClientID}"
+                 Grid.Column="1" Grid.Row="3"/>
+        <TextBox Text="{Binding Order.PhoneID}"
+                 Grid.Column="1" Grid.Row="4"/>
+        <TextBox Text="{Binding Order.RepairEmployeeID, TargetNullValue={x:Static sys:String.Empty}}"
+                 Grid.Column="1" Grid.Row="5"/>
+        <TextBox Text="{Binding Order.CustomerServiceEmployeeID, TargetNullValue={x:Static sys:String.Empty}}"
+                 Grid.Column="1" Grid.Row="6"/>
+
+        <Grid Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2"
+              HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Zapisz"
+                    Grid.Column="0"
+                    Click="SaveButton_Click"/>
+            <Button Content="Anuluj"
+                    Grid.Column="1"
+                    Click="CancelButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>
