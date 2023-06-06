@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MobilePhoneServiceApp.Database;
 using MobilePhoneServiceApp.Database.Models;
+using MobilePhoneServiceApp.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -42,6 +43,9 @@ namespace MobilePhoneServiceApp.ViewModels
             set => _order.ClientID = value.ID;
         }
 
+        [ObservableProperty]
+        private Phone _assignedPhone;
+
         public List<Employee> RepairEmployees =>
             _dbContext.Employees
             .Where(e => _dbContext.Departments
@@ -72,20 +76,38 @@ namespace MobilePhoneServiceApp.ViewModels
         {
             _order = order;
             _dbContext = ServiceHelper.GetService<AppDbContext>();
+
+            var propInfo = order.GetType().GetProperty("PhoneID");
+            if (propInfo.GetValue(order) is null)
+            {
+                AssignedPhone = _dbContext.Phones.Where(p => p.ID == order.PhoneID).Single();
+            }
         }
 
         public bool ValidateData()
         {
             var damageDescription = Order.DamageDescription;
-            var statusID = Order.OrderStatusID;
-            var clientID = Order.ClientID;
-            var phoneID = Order.PhoneID;
 
             var messageText = string.Empty;
 
             if (damageDescription is null || damageDescription == string.Empty)
             {
                 messageText += "Opis szkody nie może być pusty!\n";
+            }
+
+            if (SelectedOrderStatus == null)
+            {
+                messageText += "Status zlecenia nie może być pusty!\n";
+            }
+
+            if (SelectedClient == null)
+            {
+                messageText += "Klient nie może być pusty!\n";
+            }
+
+            if (AssignedPhone == null)
+            {
+                messageText += "Telefon nie może być pusty!\n";
             }
 
             if (messageText != string.Empty)
@@ -96,6 +118,24 @@ namespace MobilePhoneServiceApp.ViewModels
             else
             {
                 return true;
+            }
+        }
+
+        [RelayCommand]
+        private void EditPhone()
+        {
+            AddModifyPhoneWindowBase modifyWindow;
+            if (AssignedPhone is null)
+                modifyWindow = new AddPhoneWindow();
+            else
+                modifyWindow = new ModifyPhoneWindow(AssignedPhone);
+            modifyWindow.ShowDialog();
+
+            var result = modifyWindow.Result;
+
+            if (result is not null)
+            {
+                AssignedPhone = result;
             }
         }
 

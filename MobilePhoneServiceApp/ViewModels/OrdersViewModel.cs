@@ -92,22 +92,26 @@ namespace MobilePhoneServiceApp.ViewModels
             var modifyWindow = new ModifyOrderWindow(SelectedOrder);
             modifyWindow.ShowDialog();
 
-            //var result = modifyWindow.Result;
+            var result = modifyWindow.Result;
 
-            //if (result is not null)
-            //{
-            //    SelectedPhone.Brand = result.Brand;
-            //    SelectedPhone.Model = result.Model;
-            //    SelectedPhone.IMEI = result.IMEI;
-            //    SelectedPhone.PhotosURL = result.PhotosURL;
+            if (result is not null)
+            {
+                SelectedOrder.DamageDescription = result.DamageDescription;
+                SelectedOrder.OrderStatusID = result.OrderStatusID;
+                SelectedOrder.ShippingAddressID = result.ShippingAddressID;
+                SelectedOrder.ClientID  = result.ClientID;
+                SelectedOrder.PhoneID = result.PhoneID;
+                SelectedOrder.RepairEmployeeID = result.RepairEmployeeID;
+                SelectedOrder.CustomerServiceEmployeeID = result.CustomerServiceEmployeeID;
 
-            //    // SelectedPhone is one of tracked entities so no need to call Update()
-            //    _dbContext.SaveChanges();
+                // ChangeTracker.Clear is called in AddModifyOrderWindowBase so it is needed to call Update
+                _dbContext.Orders.Update(SelectedOrder);
+                _dbContext.SaveChanges();
 
-            //    LoadItems();
+                LoadItems();
 
-            //    MessageBox.Show("Telefon został pomyślnie zmodyfikowany.");
-            //}
+                MessageBox.Show("Telefon został pomyślnie zmodyfikowany.");
+            }
         }
 
         [RelayCommand(CanExecute = nameof(CanBeExecuted))]
@@ -131,17 +135,17 @@ namespace MobilePhoneServiceApp.ViewModels
             var addNewWindow = new AddOrderWindow();
             addNewWindow.ShowDialog();
 
-            //var result = addNewWindow.Result;
+            var result = addNewWindow.Result;
 
-            //if (result is not null)
-            //{
-            //    _dbContext.Orders.Add(result);
-            //    _dbContext.SaveChanges();
+            if (result is not null)
+            {
+                _dbContext.Orders.Add(result);
+                _dbContext.SaveChanges();
 
-            //    LoadItems();
+                LoadItems();
 
-            //    MessageBox.Show("Telefon został pomyślnie dodany.");
-            //}
+                MessageBox.Show("Zlecenie zostało pomyślnie dodane.");
+            }
         }
     }
 }

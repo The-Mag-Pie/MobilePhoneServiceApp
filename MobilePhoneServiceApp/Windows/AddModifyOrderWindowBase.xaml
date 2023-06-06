@@ -74,8 +74,23 @@
         <ComboBox ItemsSource="{Binding Clients}"
                   SelectedItem="{Binding SelectedClient}"
                   Grid.Column="1" Grid.Row="3"/>
-        <TextBox Text="{Binding Order.PhoneID}"
-                 Grid.Column="1" Grid.Row="4"/>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="1" Grid.Row="4">
+            <Button Content="Modyfikuj"
+                    Command="{Binding EditPhoneCommand}"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Marka i model telefonu:"/>
+                <Label Content="{Binding AssignedPhone.Brand, TargetNullValue='brak'}"/>
+                <Label Content="{Binding AssignedPhone.Model}"/>
+            </StackPanel>
+            <!--<Label>
+                <Run Text="Marka i model telefonu: "/>
+                <Run Text="{Binding AssignedPhone.Brand, TargetNullValue='brak'}"/>
+
+            </Label>-->
+        </StackPanel>
+        <!--<TextBox Text="{Binding Order.PhoneID}"
+                 Grid.Column="1" Grid.Row="4"/>-->
         <Grid Grid.Column="1" Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

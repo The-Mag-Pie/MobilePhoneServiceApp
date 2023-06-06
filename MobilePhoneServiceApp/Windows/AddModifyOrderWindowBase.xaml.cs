@@ -1,4 +1,5 @@
-﻿using MobilePhoneServiceApp.Database.Models;
+﻿using MobilePhoneServiceApp.Database;
+using MobilePhoneServiceApp.Database.Models;
 using MobilePhoneServiceApp.ViewModels;
 using System.Windows;
 
@@ -22,6 +23,21 @@ namespace MobilePhoneServiceApp.Windows
         {
             if (_viewModel.ValidateData() == true)
             {
+                var dbContext = ServiceHelper.GetService<AppDbContext>();
+
+                if (_viewModel.AssignedPhone.ID == null)
+                {
+                    dbContext.Phones.Add(_viewModel.AssignedPhone);
+                }
+                else
+                {
+                    dbContext.ChangeTracker.Clear();
+                    dbContext.Phones.Update(_viewModel.AssignedPhone);
+                }
+                dbContext.SaveChanges();
+
+                _viewModel.Order.PhoneID = _viewModel.AssignedPhone.ID;
+
                 Result = _viewModel.Order;
                 Close();
             }
